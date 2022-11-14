@@ -20,7 +20,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//input[@value = 'Log in']")
     protected WebElement loginButton;
 
-    @FindBy(xpath = "//div[@class='message-error']//li[text() = 'The credentials provided are incorrect']")
-    protected WebElement incorrectCredentials;
+    @FindBy(xpath = "//*[@class = 'validation-summary-errors']//li")
+    protected WebElement loginErrorMessageLabel;
 
 }

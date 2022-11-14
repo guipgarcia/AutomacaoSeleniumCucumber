@@ -1,14 +1,16 @@
 package actions.login_action;
 
 import generic_methods.GenericMethods;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.login_page.LoginPage;
 
 import static org.openqa.selenium.By.xpath;
+import static project_global_variables.GlobalVariables.CREDENTIALS_ERROR_MESSAGE;
+import static project_global_variables.GlobalVariables.NO_CUSTOMER_ACCOUNT_FOUND;
 
 public class LoginAction extends LoginPage {
-
     public GenericMethods genericMethods = new GenericMethods();
 
     public void fillLoginForm(String username, String password){
@@ -19,6 +21,20 @@ public class LoginAction extends LoginPage {
         genericMethods.sendKeys(passwordField, password);
 
         // Click on login button
+        clickLoginButton();
+    }
+
+    public void fillPasswordInLoginForm(String password){
+        //Fill password field
+        genericMethods.sendKeys(passwordField, password);
+    }
+
+    public void fillEmailInLoginForm(String email){
+        //Fill Login field
+        genericMethods.sendKeys(emailField, email);
+    }
+
+    public void clickLoginButton(){
         genericMethods.click(loginButton);
     }
 
@@ -28,7 +44,13 @@ public class LoginAction extends LoginPage {
     }
 
     public void wrongCredentialsValidation(){
-        genericMethods.validateVisibilityOfElement(incorrectCredentials);
+        genericMethods.validateVisibilityOfElement(loginErrorMessageLabel);
+        Assert.assertEquals(CREDENTIALS_ERROR_MESSAGE, loginErrorMessageLabel.getText());
+    }
+
+    public void loginWithoutEmail(){
+        genericMethods.validateVisibilityOfElement(loginErrorMessageLabel);
+        Assert.assertEquals(NO_CUSTOMER_ACCOUNT_FOUND, loginErrorMessageLabel.getText());
     }
 
     // ####################### REUSABLES #######################

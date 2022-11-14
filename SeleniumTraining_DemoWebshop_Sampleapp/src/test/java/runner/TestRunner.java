@@ -17,7 +17,7 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
         snippets = SnippetType.CAMELCASE,
         strict = true,
 
-        tags = "@ExecuteTest"
+        tags = "@LoginWithoutEmail"
 )
 
 @RunWith(Cucumber.class)
