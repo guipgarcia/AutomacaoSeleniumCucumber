@@ -27,6 +27,7 @@ public class LoginAction extends LoginPage {
     public void fillPasswordInLoginForm(String password){
         //Fill password field
         genericMethods.sendKeys(passwordField, password);
+
     }
 
     public void fillEmailInLoginForm(String email){
@@ -34,6 +35,16 @@ public class LoginAction extends LoginPage {
         genericMethods.sendKeys(emailField, email);
     }
 
+    public void checkRememberMeCheckbox(){
+        if(rememberMeInput.getAttribute("value").equals("false"))
+            genericMethods.click(rememberMeField);
+    }
+
+    public void validateFieldsAfterRememberMeChecked(String email, String password){
+        Assert.assertEquals("true", rememberMeInput.getAttribute("value"));
+        Assert.assertEquals(email, emailField.getText());
+        Assert.assertEquals(password, passwordField.getText());
+    }
     public void clickLoginButton(){
         genericMethods.click(loginButton);
     }

@@ -23,4 +23,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@class = 'validation-summary-errors']//li")
     protected WebElement loginErrorMessageLabel;
 
+    @FindBy(xpath = "//*[@name='RememberMe' and @type='hidden']")
+    protected WebElement rememberMeInput;
+
 }

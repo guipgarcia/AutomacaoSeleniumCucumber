@@ -8,6 +8,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[@class='header-links']//a[text() = 'Log in']")
     protected WebElement loginLink;
 
+    @FindBy(className = "ico-logout")
+    protected WebElement logoutLink;
+
     @FindBy(xpath =  "//div[@class='page-title']/*[contains(text(), 'Please Sign In')]")
     protected WebElement validateLoginScreen;
 

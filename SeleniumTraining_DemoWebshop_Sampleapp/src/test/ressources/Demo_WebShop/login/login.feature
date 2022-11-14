@@ -15,8 +15,21 @@
       |   username    |password|
       |gt12@email.com |teste123|
 
-    Scenario: login with default credentials and click and remember me checkbox
+    @ExecuteTest @LoginScenario @PositiveAuth @RememberMe @Issue
+    Scenario Outline: login with default credentials and click and remember me checkbox
+      When input my email "<username>"
+      And input my password "<password>"
+      And check remember me checkbox
+      And press login button
+      And I can see the post login screen
+      And I click in logout link
+      And I am able to see the home page
+      And I click on login button
+      Then I can see the remember me checkbox checked and my credentials filled out "<username>" and "<password>"
 
+      Examples:
+        |   username    |password|
+        |gt12@email.com |teste123|
 
     @ExecuteTest @LoginScenario @NegativeAuth @WrongCredentials
     Scenario Outline: incorrect credentials on login form
@@ -45,4 +58,24 @@
 
       Examples:
         |email|
+        | gt12@email.com|
+
+    @ExecuteTest @LoginScenario @LoginWithoutPassword @NonExistentEmail @NegativeAuth @Issue
+    Scenario Outline: Fill email with nonexistent value and do not place a password
+      When input my email "<email>"
+      And press login button
+      Then incorrect credentials error message appears on screen
+      Examples:
+        |email|
         | gt13@email.com|
+
+
+    @ExecuteTest @LoginScenario @NonExistentEmail @NegativeAuth @Issue
+    Scenario Outline: Fill email with nonexistent value and right password
+      When input my email "<email>"
+      And input my password "<password>"
+      And press login button
+      Then incorrect credentials error message appears on screen
+      Examples:
+        |email|password|
+        | gt13@email.com|teste123|  

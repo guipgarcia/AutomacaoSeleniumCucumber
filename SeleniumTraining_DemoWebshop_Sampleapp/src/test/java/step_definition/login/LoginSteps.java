@@ -17,16 +17,6 @@ public class LoginSteps extends BasePage {
     private HomeAction homeAction = new HomeAction();
     private LoginAction loginAction = new LoginAction();
 
-    @Given("that I access demo webshop application")
-    public void that_i_access_demo_webshop_application() {
-        // Passar demo webshop application
-        genericMethods.openUrl(DEMO_WEBSHOP_APPLICATION);
-    }
-
-    @When("I click on login button")
-    public void iClickOnLoginButton() {
-        homeAction.clickOnLoginLink();
-    }
 
     @And("I input the default credentials")
     public void inputDefaultCredentials(){
@@ -74,5 +64,16 @@ public class LoginSteps extends BasePage {
     @When("input my email {string}")
     public void inputMyEmail(String email) {
         loginAction.fillEmailInLoginForm(email);
+        user = email;
+    }
+
+    @And("check remember me checkbox")
+    public void checkRememberMeCheckbox() {
+        loginAction.checkRememberMeCheckbox();
+    }
+
+    @Then("I can see the remember me checkbox checked and my credentials filled out {string} and {string}")
+    public void iCanSeeTheRememberMeCheckboxCheckedAndMyCredentialsFilledOutAnd(String email, String password) {
+        loginAction.validateFieldsAfterRememberMeChecked(email, password);
     }
 }
