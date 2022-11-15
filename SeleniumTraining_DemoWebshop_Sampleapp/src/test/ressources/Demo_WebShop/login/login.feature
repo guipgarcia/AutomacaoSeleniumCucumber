@@ -78,4 +78,6 @@
       Then incorrect credentials error message appears on screen
       Examples:
         |email|password|
-        | gt13@email.com|teste123|  
+        | gt13@email.com|teste123|
+
+
