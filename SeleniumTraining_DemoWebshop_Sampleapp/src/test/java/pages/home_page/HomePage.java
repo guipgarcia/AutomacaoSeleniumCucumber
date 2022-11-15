@@ -19,5 +19,8 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//ul[@class='top-menu']//a[contains(text(),'Computers')]")
     protected WebElement topMenuComputers;
+
+    @FindBy(className = "ico-register")
+    protected WebElement registerLink;
 }
 

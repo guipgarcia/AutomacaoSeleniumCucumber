@@ -20,6 +20,7 @@ public class HomeAction extends HomePage {
     }
 
     public void sucessLoginValidation() {
+        // Validate the visibility of logout link> that means that the user is logged in
         genericMethods.validateVisibilityOfElement(logoutButton);
     }
 
@@ -29,11 +30,18 @@ public class HomeAction extends HomePage {
     }
 
     public void clickLogoutLink(){
+        // Wait for logout link to be visible, then execute a click on it
         genericMethods.validateVisibilityOfElement(logoutLink);
         genericMethods.click(logoutLink);
     }
 
     public void validateHomePage(){
         Assert.assertEquals(DEMO_WEBSHOP_APPLICATION, driver.getCurrentUrl());
+    }
+
+    public void clickInRegisterLink(){
+        // Wait for register link to be visible, then execute a click on it
+        genericMethods.validateVisibilityOfElement(registerLink);
+        genericMethods.click(registerLink);
     }
 }
