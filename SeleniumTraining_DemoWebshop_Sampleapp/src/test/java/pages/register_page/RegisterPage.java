@@ -25,4 +25,10 @@ public class RegisterPage extends BasePage {
 
     @FindBy(id = "register-button")
     protected WebElement registerButton;
+
+    @FindBy(className = "result")
+    protected WebElement registrationStatus;
+
+    @FindBy(className = "field-validation-error")
+    protected WebElement requiredValidationError;
 }
