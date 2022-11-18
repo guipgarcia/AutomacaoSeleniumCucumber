@@ -64,4 +64,19 @@ public class RegisterSteps extends BasePage {
     public void allTheRequiredFieldsShowsTheErrors() {
         registerAction.allRequiredFieldsNotFilledError();
     }
+
+    @When("I fill a specific field {string} with value {string}")
+    public void iFillASpecificFieldWithValue(String field, String value) {
+        registerAction.fillSpecificField(field, value);
+    }
+
+    @Then("Except for the filled field {string} the form must display the required errors")
+    public void exceptForTheFilledFieldTheFormMustDisplayTheRequiredErrors(String field) {
+        registerAction.fillOneFieldAndVerifyErrors(field);
+    }
+
+    @Then("I get wrong email message from register page")
+    public void iGetWrongEmailMessageFromRegisterPage() {
+        registerAction.validateWrongEmailMessage();
+    }
 }
