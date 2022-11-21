@@ -79,4 +79,19 @@ public class RegisterSteps extends BasePage {
     public void iGetWrongEmailMessageFromRegisterPage() {
         registerAction.validateWrongEmailMessage();
     }
+
+    @Then("I get password range error message")
+    public void iGetPasswordRangeErrorMessage() {
+        registerAction.validatePasswordLassThan5CharactersMessage();
+    }
+
+    @And("I press tab button in password field")
+    public void iPressTabButtonInPasswordField() {
+        registerAction.pressTabButtonInPasswordField();
+    }
+
+    @Then("I get password not matches error")
+    public void iGetPasswordNotMatchesError() {
+        registerAction.passwordNotMatchesError();
+    }
 }

@@ -1,6 +1,7 @@
 package actions.register_action;
 
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.register_page.RegisterPage;
@@ -8,7 +9,7 @@ import pages.register_page.RegisterPage;
 import java.util.List;
 
 import static org.openqa.selenium.By.xpath;
-import static project_global_variables.GlobalVariables.WRONG_EMAIL_TEXT;
+import static project_global_variables.GlobalVariables.*;
 
 public class RegisterAction extends RegisterPage {
     private WebElement genderElement;
@@ -99,6 +100,21 @@ public class RegisterAction extends RegisterPage {
     public void validateWrongEmailMessage(){
         genericMethods.validateVisibilityOfElement(emailError);
         Assert.assertEquals(WRONG_EMAIL_TEXT, emailError.getText());
+    }
+
+    public void validatePasswordLassThan5CharactersMessage(){
+        genericMethods.validateVisibilityOfElement(passwordLassThan5CharactersError);
+        Assert.assertEquals(EMAIL_LESS_THAN_5_CHARACTERS_TEXT, passwordLassThan5CharactersError.getText());
+    }
+
+    public void passwordNotMatchesError(){
+        genericMethods.validateVisibilityOfElement(confirmPasswordErrorMessage);
+        Assert.assertEquals(CONFIRM_PASSWORD_WRONG_TEXT, confirmPasswordErrorMessage.getText());
+    }
+
+    public void pressTabButtonInPasswordField(){
+        genericMethods.highlight(passwordField);
+        passwordField.sendKeys(Keys.TAB);
     }
 
     public void fillOneFieldAndVerifyErrors(String errorToRemove){

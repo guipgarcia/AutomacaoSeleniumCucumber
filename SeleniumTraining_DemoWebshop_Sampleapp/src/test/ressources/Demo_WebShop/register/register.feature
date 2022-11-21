@@ -71,4 +71,21 @@ Feature: Register on Demo Webshop Application
         |   test_test.com     |
         |   abcde@some.com1   |
 
+    @ExecuteTest @RegisterScenario @NegativeRegister @RequiredFieldsValidation @WrongPasswordValidation
+      Scenario Outline: Fill Password with 5 characters
+        When I fill "<password>" in password field
+        And I press tab button in password field
+        Then I get password range error message
+        Examples:
+        |password|
+        |  12345 |
 
+    @ExecuteTest @RegisterScenario @NegativeRegister @RequiredFieldsValidation @WrongPasswordValidation
+      Scenario Outline: Fill confirm password with a different value than password field
+        When I fill "<password>" in password field
+        And I fill "<confirmPassword>" in confirm password field
+        And I click in register button
+        Then I get password not matches error
+        Examples:
+        |password   | confirmPassword|
+        | 123456    | 12345y         |
