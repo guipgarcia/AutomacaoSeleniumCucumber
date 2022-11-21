@@ -12,5 +12,8 @@ public class GlobalVariables {
     // Expected Messages
     public static final String CREDENTIALS_ERROR_MESSAGE = "The credentials provided are incorrect";
     public static final String NO_CUSTOMER_ACCOUNT_FOUND = "No customer account found";
+    public static final String WRONG_EMAIL_TEXT = "Wrong email";
+    public static final String EMAIL_LESS_THAN_5_CHARACTERS_TEXT = "The password should have at least 6 characters.";
+    public static final String CONFIRM_PASSWORD_WRONG_TEXT = "The password and confirmation password do not match.";
 
 }
