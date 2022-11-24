@@ -24,5 +24,8 @@ public class HomePage extends BasePage {
     @FindBy(className = "ico-register")
     protected WebElement registerLink;
 
+    @FindBy(className = "ico-wishlist")
+    protected WebElement wishListLink;
+
 }
 
