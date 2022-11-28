@@ -11,8 +11,13 @@ public class ShopAction extends ShopPage {
 
     public void selectAnItemInShop(String item){
         // Wait for the visibility of shop page body, then execute a click on the desired item
-        wait.until(ExpectedConditions.visibilityOf(shopPage));
         genericMethods.click(dynamicMapForSelectItem(item));
+    }
+
+    public void clickAddToWishListButton(){
+        // Wait for the visibility of add to wishlist button, then execute a click on it
+        genericMethods.validateVisibilityOfElement(addToWishListBtn);
+        genericMethods.click(addToWishListBtn);
     }
 
     public WebElement dynamicMapForSelectItem(String item){

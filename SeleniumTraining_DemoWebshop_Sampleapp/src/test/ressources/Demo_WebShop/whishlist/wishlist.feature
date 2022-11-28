@@ -6,10 +6,9 @@ Feature: Wishlist functionality DemoWebshop Application
     Given that I access demo webshop application
     When I click on login button
     And I input the default credentials
-    And I click on login button
 
 
-
+    @ExecuteTest @WishListScenario @AddToWishList @ValidateItemInWishListPage
     Scenario Outline: Putting blue shoes item in my wishlist
       And I select "<menu>" menu in menu bar
       And I click on "<item>" inside the shop page

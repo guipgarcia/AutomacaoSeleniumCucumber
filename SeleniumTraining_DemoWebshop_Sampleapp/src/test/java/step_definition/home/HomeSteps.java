@@ -37,4 +37,15 @@ public class HomeSteps extends BasePage {
     public void iAmAbleToSeeTheHomePage() {
         homeAction.validateHomePage();
     }
+
+    @And("I select {string} menu in menu bar")
+    public void iSelectMenuInMenuBar(String menu) {
+        homeAction.selectTopMenu(menu);
+    }
+
+
+    @And("I click in wishlist link in top bar")
+    public void iClickInWishlistLinkInTopBar() {
+        homeAction.clickInWishListLink();
+    }
 }

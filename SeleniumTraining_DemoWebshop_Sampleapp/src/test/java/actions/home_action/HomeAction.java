@@ -55,6 +55,10 @@ public class HomeAction extends HomePage {
         genericMethods.click(wishListLink);
     }
 
+    public void selectTopMenu(String menu){
+        genericMethods.click(dynamicMapForTopMenu(menu));
+    }
+
 
     public WebElement dynamicMapForTopMenu(String menu){
         currentMapString = "//ul[@class = 'top-menu']//a[contains(text(), '"+menu+"')]";
