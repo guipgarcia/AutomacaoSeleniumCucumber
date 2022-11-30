@@ -1,19 +1,24 @@
 package actions.register_action;
 
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.register_page.RegisterPage;
 
 import java.util.List;
 
-import static org.openqa.selenium.By.className;
 import static org.openqa.selenium.By.xpath;
+import static project_global_variables.GlobalVariables.*;
 
 public class RegisterAction extends RegisterPage {
     private WebElement genderElement;
     private List<WebElement> requiredErrorList;
-    private List<String> expectedErrors;
+    private String[] adjustedErrorList,
+
+            allErrorsList = {"FirstName", "LastName", "Email", "Password", "ConfirmPassword"},
+            allErrorsValues = {"First name is required.", "Last name is required.", "Email is required.", "Password is required."
+                    , "Password is required."};
 
     public void registerPageVisibility(){
         genericMethods.validateVisibilityOfElement(registerForm);
@@ -66,12 +71,58 @@ public class RegisterAction extends RegisterPage {
     }
 
     public void allRequiredFieldsNotFilledError(){
-        String[] allErrorsList = {"FirstName", "LastName", "Email", "Password", "ConfirmPassword"},
-        allErrorsValues = {"First name is required.", "Last name is required.", "Email is required.", "Password is required."
-                , "Password is required."};
         for(int i = 0; i < allErrorsList.length; i++){
             Assert.assertEquals(allErrorsValues[i],
                     driver.findElement(xpath("//span[@for = '"+allErrorsList[i]+"']")).getText());
+        }
+    }
+
+    public void fillSpecificField(String fieldName, String fieldValue){
+        switch (fieldName){
+            case "FirstName":
+                fillFirstName(fieldValue);
+                break;
+            case "LastName":
+                fillLastName(fieldValue);
+                break;
+            case "Email":
+                fillEmail(fieldValue);
+                break;
+            case "Password":
+                fillPassword(fieldName);
+                break;
+            case "ConfirmPassword":
+                fillConfirmPassword(fieldName);
+                break;
+        }
+    }
+
+    public void validateWrongEmailMessage(){
+        genericMethods.validateVisibilityOfElement(emailError);
+        Assert.assertEquals(WRONG_EMAIL_TEXT, emailError.getText());
+    }
+
+    public void validatePasswordLassThan5CharactersMessage(){
+        genericMethods.validateVisibilityOfElement(passwordLassThan5CharactersError);
+        Assert.assertEquals(EMAIL_LESS_THAN_5_CHARACTERS_TEXT, passwordLassThan5CharactersError.getText());
+    }
+
+    public void passwordNotMatchesError(){
+        genericMethods.validateVisibilityOfElement(confirmPasswordErrorMessage);
+        Assert.assertEquals(CONFIRM_PASSWORD_WRONG_TEXT, confirmPasswordErrorMessage.getText());
+    }
+
+    public void pressTabButtonInPasswordField(){
+        genericMethods.highlight(passwordField);
+        passwordField.sendKeys(Keys.TAB);
+    }
+
+    public void fillOneFieldAndVerifyErrors(String errorToRemove){
+        for(int i = 0; i < allErrorsList.length; i++ ){
+            if(!allErrorsList[i].contains(errorToRemove)){
+                Assert.assertEquals(allErrorsValues[i],
+                        driver.findElement(xpath("//span[@for = '"+allErrorsList[i]+"']")).getText());
+            }
         }
     }
 
