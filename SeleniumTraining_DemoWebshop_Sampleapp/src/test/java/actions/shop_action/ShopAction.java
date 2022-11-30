@@ -29,8 +29,8 @@ public class ShopAction extends ShopPage {
 
     public WebElement dynamicMapForSelectItem(String item){
         // Saving the base path to search inside the page and concatenating with the class variable
-        currentMapString = "//a[text() = \""+item+"\"]";
-
+        currentMapString = "//*[@class ='product-title']//a[text() = \""+item+"\"]";
+        System.out.println(currentMapString);
         // Waiting for the element to be located and returning it
         wait.until(ExpectedConditions.presenceOfElementLocated(xpath(currentMapString)));
         return driver.findElement(xpath(currentMapString));
