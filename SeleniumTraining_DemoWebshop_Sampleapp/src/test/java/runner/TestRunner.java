@@ -6,7 +6,7 @@ import io.cucumber.junit.CucumberOptions;
 import io.cucumber.junit.CucumberOptions.SnippetType;
 
 @CucumberOptions(
-    features = { "classpath:Demo_WebShop"},
+    features = { "src/test/Demo_WebShop"},
     glue={"step_definition",
     "hooks"},
     plugin = {"pretty",
@@ -17,7 +17,7 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
         snippets = SnippetType.CAMELCASE,
         strict = true,
 
-        tags = "@LoginWithoutEmail"
+        tags = "@ValidateItemInWishListPage"
 )
 
 @RunWith(Cucumber.class)
