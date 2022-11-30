@@ -29,6 +29,13 @@ public class RegisterPage extends BasePage {
     @FindBy(className = "result")
     protected WebElement registrationStatus;
 
-    @FindBy(className = "field-validation-error")
-    protected WebElement requiredValidationError;
+    @FindBy(xpath = "//*[@class = 'field-validation-error']//span[@for = 'Email']")
+    protected WebElement emailError;
+
+    @FindBy(xpath = "//*[@class = 'field-validation-error']//span[@for = 'Password']")
+    protected WebElement passwordLassThan5CharactersError;
+
+    @FindBy(xpath = "//*[@class = 'field-validation-error']//span[@for = 'ConfirmPassword']")
+    protected WebElement confirmPasswordErrorMessage;
+
 }
