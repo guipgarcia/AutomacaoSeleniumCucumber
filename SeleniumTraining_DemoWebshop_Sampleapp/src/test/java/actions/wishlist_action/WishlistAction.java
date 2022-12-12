@@ -2,7 +2,9 @@ package actions.wishlist_action;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.wishlist_page.WishlistPage;
 
 import java.util.List;
@@ -41,10 +43,35 @@ public class WishlistAction extends WishlistPage {
     }
 
     public void checkRemoveCheckboxForAllItems(){
+        genericMethods.sleep(3000);
         itemBaseMap = "//tbody//td[@class = 'remove-from-cart']/input";
         wishListItems = driver.findElements(By.xpath(itemBaseMap));
         for(int i = 0; i < wishListItems.size(); i++)
             genericMethods.click(wishListItems.get(i));
+    }
+
+    public void modifyProductQuantity(String productName, String quantity){
+        WebElement mappedItem = getProductQuantityMap(productName);
+        mappedItem.clear();
+        genericMethods.sendKeys(mappedItem, quantity);
+        genericMethods.sendKeys(mappedItem, String.valueOf(Keys.ENTER));
+        genericMethods.sleep(10000);
+    }
+
+    public void validateProductQuantity(String productName, String quantity){
+        WebElement mappedElement = getProductQuantityMap(productName);
+        Assert.assertEquals(quantity,mappedElement.getAttribute("value"));
+    }
+
+    public void validateItemPriceAccordingItemQuantity(String productName){
+        System.out.println("Product Price: " + getProductPriceMap(productName).getText()
+                + "\nProduct Subtotal: " + getProductSubTotalMap(productName).getText()
+                + "\nProduct Quantity: " + getProductQuantityMap(productName).getAttribute("value"));
+        float price = Float.parseFloat(getProductPriceMap(productName).getText()),
+                subtotal = Float.parseFloat(getProductSubTotalMap(productName).getText()),
+                quantity = Integer.parseInt(getProductQuantityMap(productName).getAttribute("value"));
+
+        Assert.assertTrue(quantity * price == subtotal);
     }
 
     public void addSpecificItemToCart(String productName){
@@ -65,6 +92,24 @@ public class WishlistAction extends WishlistPage {
                 return i+1;
         }
         return 0;
+    }
+
+    private WebElement getProductQuantityMap(String productName){
+        itemBaseMap = "//tbody//td[@class = 'product']/*[text()=\""+productName+"\"]/ancestor::tr//input[contains(@name, 'itemquantity')]";
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(itemBaseMap)));
+        return driver.findElement(By.xpath(itemBaseMap));
+    }
+
+    private WebElement getProductPriceMap(String productName){
+        itemBaseMap = "//tbody//td[@class = 'product']/*[text()=\""+productName+"\"]/ancestor::tr//span[@class = 'product-unit-price']";
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(itemBaseMap)));
+        return driver.findElement(By.xpath(itemBaseMap));
+    }
+
+    private WebElement getProductSubTotalMap(String productName){
+        itemBaseMap = "//tbody//td[@class = 'product']/*[text()=\""+productName+"\"]/ancestor::tr//span[@class = 'product-subtotal']";
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(itemBaseMap)));
+        return driver.findElement(By.xpath(itemBaseMap));
     }
 
 }

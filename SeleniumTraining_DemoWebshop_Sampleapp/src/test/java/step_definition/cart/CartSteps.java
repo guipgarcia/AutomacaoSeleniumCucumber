@@ -15,6 +15,7 @@ public class CartSteps extends BasePage {
     }
 
     @Then("I can see the item {string} inside the cart table")
-    public void iCanSeeTheItemInsideTheCartTable(String arg0) {
+    public void iCanSeeTheItemInsideTheCartTable(String productName) {
+        cartAction.validateProductInsideCartTable(productName);
     }
 }

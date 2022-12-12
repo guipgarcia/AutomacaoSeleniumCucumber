@@ -17,7 +17,7 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
         snippets = SnippetType.CAMELCASE,
         strict = true,
 
-        tags = "@ValidateItemInWishListPage"
+        tags = "@Developing"
 )
 
 @RunWith(Cucumber.class)
