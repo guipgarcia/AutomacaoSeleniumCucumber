@@ -38,4 +38,19 @@ public class WishListSteps extends BasePage {
     public void iClickInAddToCartButtonInsideTheWishlistPage() {
         wishlistAction.clickAddToCartButton();
     }
+
+    @And("I modify them item {string} quantity to {string}")
+    public void iModifyThemItemQuantityTo(String productName, String quantity) {
+        wishlistAction.modifyProductQuantity(productName, quantity);
+    }
+
+    @Then("I validate that the item {string} quantity was updated to {string}")
+    public void iValidateThatTheItemQuantityWasUpdatedTo(String productName, String quantity) {
+        wishlistAction.validateProductQuantity(productName, quantity);
+    }
+
+    @Then("I can see that the price item {string} was updated according it quantity")
+    public void iCanSeeThatThePriceItemWasUpdatedAccordingItQuantity(String productItem) {
+        wishlistAction.validateItemPriceAccordingItemQuantity(productItem);
+    }
 }
