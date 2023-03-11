@@ -6,7 +6,7 @@
       Given that I access demo webshop application
       And I click on login button
 
-    @ExecuteTest @LoginScenario @PositiveAuth
+    @ExecuteTest @LoginScenario @PositiveAuth @LoginRightCredentials
     Scenario Outline: login on application using default credentials
       When input my "<username>" and "<password>"
       Then I can see the post login screen
