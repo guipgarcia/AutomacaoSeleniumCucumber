@@ -21,4 +21,33 @@ public class CartAction extends CartPage {
         genericMethods.validateVisibilityOfElement(product);
         genericMethods.highlight(product);
     }
+
+    private boolean isProductInsideCartTable(String productName){
+        baseMap = "//tbody//td[@class = 'product']/*[text()=\""+productName+"\"]";
+        try{
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(baseMap)));
+            WebElement product = driver.findElement(By.xpath(baseMap));
+            return true;
+        }catch(Exception e){}
+        return false;
+    }
+
+    private int getProductQuantity(String productName){
+        baseMap = "//table[@class = 'cart']//tr[@class = 'cart-item-row']//a[text() = '"+productName+"']";
+        String quantityText = "";
+        int productQty = 0;
+        try{
+            WebElement itemQuantity = driver.findElement(By.xpath(baseMap+"/../../td[@class='qty nobr']/input"));
+            quantityText = itemQuantity.getAttribute("value");
+            productQty = Integer.parseInt(quantityText);
+        }catch (Exception e){}
+        return productQty;
+    }
+    public Integer getQuantityForDesiredProduct(String productName){
+        boolean isProductExists = isProductInsideCartTable(productName);
+        if(isProductExists){
+            return getProductQuantity(productName);
+        }else
+            return 0;
+    }
 }

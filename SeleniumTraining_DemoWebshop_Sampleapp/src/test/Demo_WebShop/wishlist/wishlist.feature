@@ -94,3 +94,6 @@ Feature: Wishlist functionality DemoWebshop Application
       Examples:
         |menu               |item                          | quantity|
         | Jewelry           |  Black & White Diamond Heart | 3       |
+
+    Scenario Outline: Validate that the cart will receive the exact value of the product passed through wihslist
+      Examples:
