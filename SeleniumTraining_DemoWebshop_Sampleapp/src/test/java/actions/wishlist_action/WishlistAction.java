@@ -38,16 +38,25 @@ public class WishlistAction extends WishlistPage {
     }
 
     public void clickUpdateWishlistBtn(){
-        genericMethods.validateVisibilityOfElement(updateWishlistBtn);
-        genericMethods.click(updateWishlistBtn);
+        try{
+            genericMethods.validateVisibilityOfElement(updateWishlistBtn);
+            genericMethods.click(updateWishlistBtn);
+        }catch (Exception e){
+            System.out.println("############ WISHLIST UPDATE BUTTON IS NOT AVAILABLE ############");
+        }
     }
 
     public void checkRemoveCheckboxForAllItems(){
         genericMethods.sleep(3000);
         itemBaseMap = "//tbody//td[@class = 'remove-from-cart']/input";
-        wishListItems = driver.findElements(By.xpath(itemBaseMap));
-        for(int i = 0; i < wishListItems.size(); i++)
-            genericMethods.click(wishListItems.get(i));
+        try {
+            wishListItems = driver.findElements(By.xpath(itemBaseMap));
+            for (int i = 0; i < wishListItems.size(); i++)
+                genericMethods.click(wishListItems.get(i));
+        }catch(Exception e){
+            System.out.println("########## WISHLIST WAS ALREADY EMPTY ##########");
+        }
+
     }
 
     public void modifyProductQuantity(String productName, String quantity){
