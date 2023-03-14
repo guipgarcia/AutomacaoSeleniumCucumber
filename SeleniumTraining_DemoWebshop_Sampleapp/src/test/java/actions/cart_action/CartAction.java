@@ -14,6 +14,11 @@ public class CartAction extends CartPage {
         genericMethods.click(desktopOption);
     }
 
+    public void accessShoppingCart(){
+        genericMethods.validateVisibilityOfElement(shoppingCartLink);
+        genericMethods.click(shoppingCartLink);
+    }
+
     public void validateProductInsideCartTable(String productName){
         baseMap = "//tbody//td[@class = 'product']/*[text()=\""+productName+"\"]";
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(baseMap)));
@@ -22,7 +27,7 @@ public class CartAction extends CartPage {
         genericMethods.highlight(product);
     }
 
-    private boolean isProductInsideCartTable(String productName){
+    public boolean isProductInsideCartTable(String productName){
         baseMap = "//tbody//td[@class = 'product']/*[text()=\""+productName+"\"]";
         try{
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(baseMap)));

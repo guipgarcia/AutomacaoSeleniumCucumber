@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static project_global_variables.GlobalVariables.GLOBAL_HASHMAP;
+
 
 public class GenericMethods{
     private WebDriver driver;
@@ -30,6 +32,14 @@ public class GenericMethods{
         System.out.println(message);
     }
 
+    // ###################### HASHMAP METHODS ######################
+    public void addToHashMap(String key, String value){
+        GLOBAL_HASHMAP.put(key, value);
+    }
+
+    public String getValueFromHashMap(String key){
+        return GLOBAL_HASHMAP.get(key);
+    }
     // ###################### WAIT METHODS ######################
     public void sleep(long miliseconds){
         try {
