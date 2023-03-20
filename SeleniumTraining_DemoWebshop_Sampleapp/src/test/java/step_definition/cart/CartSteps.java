@@ -7,7 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-import static project_global_variables.GlobalVariables.CART_QUANTITY;
+import static project_global_variables.GlobalVariables.KEY_CART_QUANTITY;
 
 public class CartSteps extends BasePage {
 
@@ -35,12 +35,12 @@ public class CartSteps extends BasePage {
 
     @And("I take note from the {string} quantity inside the shopcart")
     public void iTakeNoteFromTheQuantityInsideTheShopcart(String productName) {
-        genericMethods.addToHashMap(CART_QUANTITY,cartAction.getQuantityForDesiredProduct(productName).toString());
+        genericMethods.addToHashMap(KEY_CART_QUANTITY,cartAction.getQuantityForDesiredProduct(productName).toString());
     }
 
     @And("I validate that the product {string} has the expected quantity {string}")
     public void iValidateThatTheProductHasTheExpectedQuantity(String productName, String quantity) {
-        Integer oldQuantity = Integer.parseInt(genericMethods.getValueFromHashMap(CART_QUANTITY)),
+        Integer oldQuantity = Integer.parseInt(genericMethods.getValueFromHashMap(KEY_CART_QUANTITY)),
                 addedQuantity = Integer.parseInt(quantity);
         Assert.assertEquals((int) cartAction.getQuantityForDesiredProduct(productName), oldQuantity + addedQuantity);
     }

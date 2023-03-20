@@ -4,6 +4,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.shop_page.ShopPage;
 
+import java.util.List;
+import java.util.Random;
+
 import static org.openqa.selenium.By.xpath;
 
 public class ShopAction extends ShopPage {
@@ -34,5 +37,29 @@ public class ShopAction extends ShopPage {
         // Waiting for the element to be located and returning it
         wait.until(ExpectedConditions.presenceOfElementLocated(xpath(currentMapString)));
         return driver.findElement(xpath(currentMapString));
+    }
+
+    public void validateExtraStepsBeforeAddToCart(){
+        try{
+            genericMethods.validateVisibilityOfElement(recipientEmailLabel);
+            genericMethods.sendKeys(recipientNameField, "TestName");
+            genericMethods.sendKeys(recipientEmailField, "TestName@email.com");
+        }catch(Exception e){
+            try{
+                genericMethods.validateVisibilityOfElement(hddLabel);
+                currentMapString = "//*[contains(text(), '320 GB')]/ancestor::ul/li";
+                List<WebElement> randomOption = driver.findElements(xpath(currentMapString));
+                Random random = new Random();
+                int  randomIndex = random.nextInt(randomOption.size());
+                genericMethods.click(driver.findElement(xpath(currentMapString+"["+randomIndex+"]")));
+                genericMethods.click(processorSlowOption);
+            }catch(Exception es){
+            }
+        }
+    }
+    public void clickOnAddToCartButton(){
+        genericMethods.validateVisibilityOfElement(addToCartBtn);
+        genericMethods.click(addToCartBtn);
+        genericMethods.validateVisibilityOfElement(productAddedToCartMessage);
     }
 }

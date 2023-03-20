@@ -27,5 +27,8 @@ public class HomePage extends BasePage {
     @FindBy(className = "ico-wishlist")
     protected WebElement wishListLink;
 
+    @FindBy(xpath = "//p[@class = 'content' and text() = 'The product has been added to your ']/a[@href='/cart']")
+    protected WebElement productAddedToCartMessage;
+
 }
 

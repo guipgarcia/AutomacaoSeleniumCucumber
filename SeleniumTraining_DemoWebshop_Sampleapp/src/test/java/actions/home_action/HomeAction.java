@@ -7,8 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.home_page.HomePage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import static org.openqa.selenium.By.xpath;
 import static project_global_variables.GlobalVariables.DEMO_WEBSHOP_APPLICATION;
+import static project_global_variables.GlobalVariables.KEY_EXTRA_CART_STEPS;
 
 public class HomeAction extends HomePage {
     private String currentMapString = "";
@@ -64,5 +69,22 @@ public class HomeAction extends HomePage {
         currentMapString = "//ul[@class = 'top-menu']//a[contains(text(), '"+menu+"')]";
         wait.until(ExpectedConditions.presenceOfElementLocated(xpath(currentMapString)));
         return driver.findElement(xpath(currentMapString));
+    }
+
+    public void addRandomProductToCartFromFeaturedProductsTab(){
+        currentMapString = "//div[@class = 'product-grid home-page-product-grid']/div[@class = 'item-box']";
+        wait.until(ExpectedConditions.presenceOfElementLocated(xpath(currentMapString)));
+        List<WebElement> featuredProductsElements = driver.findElements(xpath(currentMapString));
+        Random randomNumber = new Random();
+        int randomIndex = randomNumber.nextInt(featuredProductsElements.size());
+        WebElement currentFeaturedProduct = driver.findElement(xpath(currentMapString+"["+randomIndex+"]//div[@class = 'buttons']"));
+        genericMethods.click(currentFeaturedProduct);
+        try{
+            genericMethods.validateVisibilityOfElement(productAddedToCartMessage);
+            genericMethods.addToHashMap(KEY_EXTRA_CART_STEPS, "false");
+        }catch(Exception e){
+            System.out.println("######### EXTRA STEPS FOR ADD TO CART ARE REQUIRED ########");
+            genericMethods.addToHashMap(KEY_EXTRA_CART_STEPS, "true");
+        }
     }
 }
