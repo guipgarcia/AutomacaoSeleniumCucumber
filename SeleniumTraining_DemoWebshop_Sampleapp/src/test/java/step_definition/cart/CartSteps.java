@@ -7,7 +7,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-import static project_global_variables.GlobalVariables.CART_QUANTITY;
+import static project_global_variables.GlobalVariables.KEY_CART_QUANTITY;
+import static project_global_variables.GlobalVariables.RANDOM_PRODUCT_NAME;
 
 public class CartSteps extends BasePage {
 
@@ -23,11 +24,6 @@ public class CartSteps extends BasePage {
         cartAction.validateProductInsideCartTable(productName);
     }
 
-    @And("I click in shopping cart menu")
-    public void iClickInShoppingCartMenu() {
-        cartAction.accessShoppingCart();
-    }
-
     @Then("I validate that the product {string} was added to shopping cart table")
     public void iValidateThatTheProductWasAddedToShoppingCartTable(String productName) {
         Assert.assertTrue(cartAction.isProductInsideCartTable(productName));
@@ -35,13 +31,23 @@ public class CartSteps extends BasePage {
 
     @And("I take note from the {string} quantity inside the shopcart")
     public void iTakeNoteFromTheQuantityInsideTheShopcart(String productName) {
-        genericMethods.addToHashMap(CART_QUANTITY,cartAction.getQuantityForDesiredProduct(productName).toString());
+        genericMethods.addToHashMap(KEY_CART_QUANTITY,cartAction.getQuantityForDesiredProduct(productName).toString());
     }
 
     @And("I validate that the product {string} has the expected quantity {string}")
     public void iValidateThatTheProductHasTheExpectedQuantity(String productName, String quantity) {
-        Integer oldQuantity = Integer.parseInt(genericMethods.getValueFromHashMap(CART_QUANTITY)),
+        Integer oldQuantity = Integer.parseInt(genericMethods.getValueFromHashMap(KEY_CART_QUANTITY)),
                 addedQuantity = Integer.parseInt(quantity);
         Assert.assertEquals((int) cartAction.getQuantityForDesiredProduct(productName), oldQuantity + addedQuantity);
+    }
+
+    @Then("I validate that the shopping cart got updated with the selected item")
+    public void iValidateThatTheShoppingCartGotUpdatedWithTheSelectedItem() {
+        Assert.assertTrue(cartAction.isProductInsideCartTable(genericMethods.getValueFromHashMap(RANDOM_PRODUCT_NAME)));
+    }
+
+    @And("I check remove checkbox for all shopping cart items")
+    public void iCheckRemoveCheckboxForAllShoppingCartItems() {
+        cartAction.removeAllItemsFromShoppingCart();
     }
 }

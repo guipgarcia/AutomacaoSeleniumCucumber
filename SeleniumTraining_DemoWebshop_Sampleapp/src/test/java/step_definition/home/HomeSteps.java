@@ -48,4 +48,19 @@ public class HomeSteps extends BasePage {
     public void iClickInWishlistLinkInTopBar() {
         homeAction.clickInWishListLink();
     }
+
+    @When("I add a random product to cart from featured products tab")
+    public void iAddARandomProductToCartFromFeaturedProductsTab() {
+        homeAction.addRandomProductToCartFromFeaturedProductsTab();
+    }
+
+    @And("I click in shopping cart menu")
+    public void iClickInShoppingCartMenu() {
+        homeAction.accessShoppingCart();
+    }
+
+    @And("I navigate to home page")
+    public void iNavigateToHomePage() {
+        homeAction.clickInHomePageImg();
+    }
 }
