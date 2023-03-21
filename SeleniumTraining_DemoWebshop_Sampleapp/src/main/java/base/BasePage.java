@@ -13,7 +13,7 @@ public abstract class BasePage {
 
     public BasePage(){
         driver = DriverFactory.getDriver();
-        wait = new WebDriverWait(driver, 45);
+        wait = new WebDriverWait(driver, 15);
         genericMethods = new GenericMethods();
         PageFactory.initElements(driver, this);
     }

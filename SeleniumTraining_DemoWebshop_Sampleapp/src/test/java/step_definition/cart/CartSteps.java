@@ -2,6 +2,7 @@ package step_definition.cart;
 
 import actions.cart_action.CartAction;
 import base.BasePage;
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -49,5 +50,36 @@ public class CartSteps extends BasePage {
     @And("I check remove checkbox for all shopping cart items")
     public void iCheckRemoveCheckboxForAllShoppingCartItems() {
         cartAction.removeAllItemsFromShoppingCart();
+    }
+
+    @And("I fill a random zipcode in shopping cart")
+    public void iFillARandomZipcodeInShoppingCart() {
+        Faker faker = new Faker();
+        cartAction.fillZipPostalCode(faker.idNumber().toString());
+    }
+
+    @And("I click in estimate shipping in shopping cart page")
+    public void iClickInEstimateShippingInShoppingCartPage() {
+        cartAction.clickEstimateShippingButton();
+    }
+
+    @Then("I validate that the shipping results panel is displayed")
+    public void iValidateThatTheShippingResultsPanelIsDisplayed() {
+        Assert.assertTrue(cartAction.isEstimateShippingResults());
+    }
+
+    @And("I check terms of services checkbox in shopping cart page")
+    public void iCheckTermsOfServicesCheckboxInShoppingCartPage() {
+        cartAction.checkTermsOfServiceCheckbox();
+    }
+
+    @Then("I click in checkout button in shopping cart page")
+    public void iClickInCheckoutButtonInShoppingCartPage() {
+        cartAction.clickCheckouBtn();
+    }
+
+    @Then("I can see that the checkout page is displayed")
+    public void iCanSeeThatTheCheckoutPageIsDisplayed() {
+        Assert.assertTrue(cartAction.isInCheckoutPage());
     }
 }

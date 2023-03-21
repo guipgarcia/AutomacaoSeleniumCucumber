@@ -50,9 +50,9 @@ public class ShopAction extends ShopPage {
                 List<WebElement> randomOption = driver.findElements(xpath(currentMapString));
                 Random random = new Random();
                 int  randomIndex = random.nextInt(randomOption.size());
-                genericMethods.click(driver.findElement(xpath(currentMapString+"["+randomIndex+"]")));
-                genericMethods.click(processorSlowOption);
+                genericMethods.click(driver.findElement(xpath(currentMapString+"["+randomIndex+"]/input")));
             }catch(Exception es){
+                genericMethods.click(processorSlowOption);
             }
         }
     }

@@ -17,8 +17,6 @@ public class CartAction extends CartPage {
         genericMethods.click(desktopOption);
     }
 
-
-
     public void validateProductInsideCartTable(String productName){
         baseMap = "//tbody//td[@class = 'product']/*[text()=\""+productName+"\"]";
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(baseMap)));
@@ -58,12 +56,49 @@ public class CartAction extends CartPage {
     }
 
     public void removeAllItemsFromShoppingCart(){
-        baseMap = "//td[@class = 'remove-from-cart']";
-        List<WebElement> removeFromCart = driver.findElements(xpath(baseMap));
-        for(int i = 0; i < removeFromCart.size(); i++){
-            genericMethods.click(removeFromCart.get(i));
-        }
-        genericMethods.click(updateCartButton);
+        try {
+            baseMap = "//td[@class = 'remove-from-cart']";
+            List<WebElement> removeFromCart = driver.findElements(xpath(baseMap));
+            for (int i = 0; i < removeFromCart.size(); i++) {
+                genericMethods.click(removeFromCart.get(i));
+            }
+            genericMethods.click(updateCartButton);
+        }catch (Exception e){}
         genericMethods.validateVisibilityOfElement(yourShoppingCartIsEmptyMessage);
+    }
+
+    public void fillZipPostalCode(String zipcode){
+        genericMethods.validateVisibilityOfElement(zipPostalCodeField);
+        genericMethods.sendKeys(zipPostalCodeField, zipcode);
+    }
+
+    public void clickEstimateShippingButton(){
+        genericMethods.validateVisibilityOfElement(estimateShippingBtn);
+        genericMethods.click(estimateShippingBtn);
+    }
+
+    public boolean isEstimateShippingResults(){
+       try {
+           genericMethods.validateVisibilityOfElement(shippingResults);
+           genericMethods.highlight(shippingResults);
+           return true;
+       }catch (Exception e){}
+       return false;
+    }
+
+    public void checkTermsOfServiceCheckbox(){
+        genericMethods.click(termsOfServiceCheckbox);
+    }
+
+    public void clickCheckouBtn(){
+        genericMethods.click(checkoutBtn);
+    }
+
+    public boolean isInCheckoutPage(){
+        try {
+            genericMethods.validateVisibilityOfElement(checkoutPageTitle);
+            return true;
+        }catch (Exception ignored){}
+        return false;
     }
 }
