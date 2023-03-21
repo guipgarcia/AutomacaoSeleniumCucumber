@@ -21,6 +21,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//ul[@class='top-menu']//a[contains(text(),'Computers')]")
     protected WebElement topMenuComputers;
 
+    @FindBy(id = "topcartlink")
+    protected WebElement shoppingCartLink;
+
     @FindBy(className = "ico-register")
     protected WebElement registerLink;
 
@@ -30,5 +33,10 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//p[@class = 'content' and text() = 'The product has been added to your ']/a[@href='/cart']")
     protected WebElement productAddedToCartMessage;
 
+    @FindBy(xpath = "//*[@id = 'bar-notification']//span")
+    protected WebElement closeMessage;
+
+    @FindBy(xpath = "//*[@alt = 'Tricentis Demo Web Shop']")
+    protected WebElement homePageImg;
 }
 

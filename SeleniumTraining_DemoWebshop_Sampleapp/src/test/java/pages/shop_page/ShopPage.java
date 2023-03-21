@@ -20,6 +20,9 @@ public class ShopPage extends BasePage {
     @FindBy(xpath = "//p[@class = 'content' and text() = 'The product has been added to your ']/a[@href='/cart']")
     protected WebElement productAddedToCartMessage;
 
+    @FindBy(xpath = "//*[@id = 'bar-notification']//span")
+    protected WebElement closeMessage;
+
     @FindBy(id = "giftcard_2_RecipientName")
     protected WebElement recipientNameField;
 
@@ -33,4 +36,7 @@ public class ShopPage extends BasePage {
 
     @FindBy(xpath = "//ul[@class = 'option-list']//*[contains(text(), 'Slow')]")
     protected WebElement processorSlowOption;
+
+    @FindBy(xpath = "//div[@class = 'page product-details-page']")
+    protected WebElement productDetailsPage;
 }

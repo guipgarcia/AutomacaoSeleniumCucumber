@@ -1,7 +1,6 @@
 package step_definition.home;
 
 import actions.home_action.HomeAction;
-import actions.shop_action.ShopAction;
 import base.BasePage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -53,5 +52,15 @@ public class HomeSteps extends BasePage {
     @When("I add a random product to cart from featured products tab")
     public void iAddARandomProductToCartFromFeaturedProductsTab() {
         homeAction.addRandomProductToCartFromFeaturedProductsTab();
+    }
+
+    @And("I click in shopping cart menu")
+    public void iClickInShoppingCartMenu() {
+        homeAction.accessShoppingCart();
+    }
+
+    @And("I navigate to home page")
+    public void iNavigateToHomePage() {
+        homeAction.clickInHomePageImg();
     }
 }

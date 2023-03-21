@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 
 import static project_global_variables.GlobalVariables.KEY_CART_QUANTITY;
+import static project_global_variables.GlobalVariables.RANDOM_PRODUCT_NAME;
 
 public class CartSteps extends BasePage {
 
@@ -21,11 +22,6 @@ public class CartSteps extends BasePage {
     @Then("I can see the item {string} inside the cart table")
     public void iCanSeeTheItemInsideTheCartTable(String productName) {
         cartAction.validateProductInsideCartTable(productName);
-    }
-
-    @And("I click in shopping cart menu")
-    public void iClickInShoppingCartMenu() {
-        cartAction.accessShoppingCart();
     }
 
     @Then("I validate that the product {string} was added to shopping cart table")
@@ -43,5 +39,15 @@ public class CartSteps extends BasePage {
         Integer oldQuantity = Integer.parseInt(genericMethods.getValueFromHashMap(KEY_CART_QUANTITY)),
                 addedQuantity = Integer.parseInt(quantity);
         Assert.assertEquals((int) cartAction.getQuantityForDesiredProduct(productName), oldQuantity + addedQuantity);
+    }
+
+    @Then("I validate that the shopping cart got updated with the selected item")
+    public void iValidateThatTheShoppingCartGotUpdatedWithTheSelectedItem() {
+        Assert.assertTrue(cartAction.isProductInsideCartTable(genericMethods.getValueFromHashMap(RANDOM_PRODUCT_NAME)));
+    }
+
+    @And("I check remove checkbox for all shopping cart items")
+    public void iCheckRemoveCheckboxForAllShoppingCartItems() {
+        cartAction.removeAllItemsFromShoppingCart();
     }
 }

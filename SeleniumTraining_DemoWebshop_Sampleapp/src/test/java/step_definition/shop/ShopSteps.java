@@ -26,15 +26,12 @@ public class ShopSteps extends BasePage {
         shopAction.clickOnProductAddedToWishlistLink();
     }
 
-    @And("In shop page I click in Add to Cart button one more time")
-    public void inShopPageIClickInAddToCartButtonOneMoreTime() {
+    @And("I validate if it is necessary to proceed with extra information on product")
+    public void iValidateIfItIsNecessaryToProceedWithExtraInformationOnProduct() {
         if(genericMethods.getValueFromHashMap(KEY_EXTRA_CART_STEPS).equalsIgnoreCase("true")) {
             shopAction.validateExtraStepsBeforeAddToCart();
             shopAction.clickOnAddToCartButton();
         }
     }
 
-    @Then("I validate that the shopping cart got updated with the selected item")
-    public void iValidateThatTheShoppingCartGotUpdatedWithTheSelectedItem() {
-    }
 }

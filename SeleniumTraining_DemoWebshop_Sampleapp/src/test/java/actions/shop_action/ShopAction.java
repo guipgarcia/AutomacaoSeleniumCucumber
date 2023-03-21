@@ -40,13 +40,12 @@ public class ShopAction extends ShopPage {
     }
 
     public void validateExtraStepsBeforeAddToCart(){
+        genericMethods.validateVisibilityOfElement(productDetailsPage);
         try{
-            genericMethods.validateVisibilityOfElement(recipientEmailLabel);
             genericMethods.sendKeys(recipientNameField, "TestName");
             genericMethods.sendKeys(recipientEmailField, "TestName@email.com");
         }catch(Exception e){
             try{
-                genericMethods.validateVisibilityOfElement(hddLabel);
                 currentMapString = "//*[contains(text(), '320 GB')]/ancestor::ul/li";
                 List<WebElement> randomOption = driver.findElements(xpath(currentMapString));
                 Random random = new Random();
@@ -61,5 +60,9 @@ public class ShopAction extends ShopPage {
         genericMethods.validateVisibilityOfElement(addToCartBtn);
         genericMethods.click(addToCartBtn);
         genericMethods.validateVisibilityOfElement(productAddedToCartMessage);
+        genericMethods.click(closeMessage);
+        wait.until(ExpectedConditions.invisibilityOf(closeMessage));
     }
+
+
 }

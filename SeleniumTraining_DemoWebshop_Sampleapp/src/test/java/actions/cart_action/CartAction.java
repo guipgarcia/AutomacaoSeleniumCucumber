@@ -1,10 +1,13 @@
 package actions.cart_action;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.cart_page.CartPage;
+
+import java.util.List;
+
+import static org.openqa.selenium.By.xpath;
 
 public class CartAction extends CartPage {
 
@@ -14,10 +17,7 @@ public class CartAction extends CartPage {
         genericMethods.click(desktopOption);
     }
 
-    public void accessShoppingCart(){
-        genericMethods.validateVisibilityOfElement(shoppingCartLink);
-        genericMethods.click(shoppingCartLink);
-    }
+
 
     public void validateProductInsideCartTable(String productName){
         baseMap = "//tbody//td[@class = 'product']/*[text()=\""+productName+"\"]";
@@ -32,6 +32,7 @@ public class CartAction extends CartPage {
         try{
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(baseMap)));
             WebElement product = driver.findElement(By.xpath(baseMap));
+            genericMethods.highlight(product);
             return true;
         }catch(Exception e){}
         return false;
@@ -54,5 +55,15 @@ public class CartAction extends CartPage {
             return getProductQuantity(productName);
         }else
             return 0;
+    }
+
+    public void removeAllItemsFromShoppingCart(){
+        baseMap = "//td[@class = 'remove-from-cart']";
+        List<WebElement> removeFromCart = driver.findElements(xpath(baseMap));
+        for(int i = 0; i < removeFromCart.size(); i++){
+            genericMethods.click(removeFromCart.get(i));
+        }
+        genericMethods.click(updateCartButton);
+        genericMethods.validateVisibilityOfElement(yourShoppingCartIsEmptyMessage);
     }
 }

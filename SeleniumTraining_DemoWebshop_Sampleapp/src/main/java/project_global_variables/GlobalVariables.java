@@ -20,6 +20,7 @@ public class GlobalVariables {
     public static final String WISHLIST_EMPTY_MESSAGE = "The wishlist is empty!";
     public static final String KEY_CART_QUANTITY = "CART_QUANTITY";
 
+    public static final String RANDOM_PRODUCT_NAME = "RANDOM_PRODUCT_NAME";
     public static final String KEY_EXTRA_CART_STEPS = "EXTRA_CART_STEPS";
     public static HashMap<String,String> GLOBAL_HASHMAP = new HashMap<>();
 
