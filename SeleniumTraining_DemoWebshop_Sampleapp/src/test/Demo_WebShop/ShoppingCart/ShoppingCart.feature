@@ -4,7 +4,7 @@ Feature: Testing Shopping Cart Functionalities
     And I click on login button
     And I input the default credentials
 
-  @Developings @ShoppingCart @AddRandomProductToTheCart
+  @Developing @ShoppingCart @AddRandomProductToTheCart
   Scenario: Add product inside Shopping Cart Table From HomePage
     And I click in shopping cart menu
     And I check remove checkbox for all shopping cart items
@@ -15,7 +15,7 @@ Feature: Testing Shopping Cart Functionalities
     Then I validate that the shopping cart got updated with the selected item
 
 
-  @Developings @ShoppingCart @AddRandomProductToTheCart
+  @Developing @ShoppingCart @AddRandomProductToTheCart
   Scenario: Add a random product from home page and estimate the shipping for the selected product
     And I click in shopping cart menu
     And I check remove checkbox for all shopping cart items
@@ -29,7 +29,7 @@ Feature: Testing Shopping Cart Functionalities
     Then I validate that the shipping results panel is displayed
 
 
-  @Developings @ShoppingCart @AddRandomProductToTheCart
+  @Developing @ShoppingCart @AddRandomProductToTheCart
   Scenario: Add a random product from home page and estimate the shipping for the selected product
     And I click in shopping cart menu
     And I check remove checkbox for all shopping cart items
@@ -62,3 +62,8 @@ Feature: Testing Shopping Cart Functionalities
     And I can see that the checkout page is displayed
     And I click in continue button for billing address page
     And I click in continue button for shipping address page
+    And I click in continue button for shipping method page
+    And I click in continue button for payment method page
+    And I click in continue button for payment information page
+    Then I validate that the selected product is inside confirm order page and click in confirm button
+    And I validate that the order was processed with success

@@ -3,7 +3,10 @@ package step_definition.checkout;
 import actions.checkout_action.CheckoutAction;
 import base.BasePage;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import org.junit.Assert;
+
+import static project_global_variables.GlobalVariables.RANDOM_PRODUCT_NAME;
 
 public class CheckoutSteps extends BasePage {
 
@@ -19,5 +22,35 @@ public class CheckoutSteps extends BasePage {
     public void iClickInContinueButtonForShippingAddressPage() {
         Assert.assertTrue(checkoutAction.isInShippingAddressTab());
         checkoutAction.clickInShippingAddressContinueBtn();
+    }
+
+    @And("I click in continue button for shipping method page")
+    public void iClickInContinueButtonForShippingMethodPage() {
+        Assert.assertTrue(checkoutAction.isInShippingMethodTab());
+        checkoutAction.clickInShippingMethodContinueBtn();
+    }
+
+    @And("I click in continue button for payment method page")
+    public void iClickInContinueButtonForPaymentMethodPage() {
+        Assert.assertTrue(checkoutAction.isInPaymentMethodTab());
+        checkoutAction.clickInPaymentMethodContinueBtn();
+    }
+
+    @And("I click in continue button for payment information page")
+    public void iClickInContinueButtonForPaymentInformationPage() {
+        Assert.assertTrue(checkoutAction.isInPaymentInformationTab());
+        checkoutAction.clickInPaymentInformationContinueBtn();
+    }
+
+    @Then("I validate that the selected product is inside confirm order page and click in confirm button")
+    public void iValidateThatTheSelectedProductIsInsideConfirmOrderPageAndClickInConfirmButton() {
+        Assert.assertTrue(checkoutAction.isProductInsideConfirmOrder(genericMethods.getValueFromHashMap(RANDOM_PRODUCT_NAME)));
+        Assert.assertTrue(checkoutAction.isInConfirmOrderTab());
+        checkoutAction.clickInConfirmOrderBtn();
+    }
+
+    @And("I validate that the order was processed with success")
+    public void iValidateThatTheOrderWasProcessedWithSuccess() {
+        Assert.assertTrue(checkoutAction.isOrderProcessedWithSuccessMessage());
     }
 }

@@ -52,7 +52,11 @@ public class ShopAction extends ShopPage {
                 int  randomIndex = random.nextInt(randomOption.size());
                 genericMethods.click(driver.findElement(xpath(currentMapString+"["+randomIndex+"]/input")));
             }catch(Exception es){
-                genericMethods.click(processorSlowOption);
+                try {
+                    genericMethods.click(processorSlowOption);
+                }catch (Exception ignored){
+
+                }
             }
         }
     }

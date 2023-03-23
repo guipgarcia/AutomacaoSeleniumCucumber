@@ -54,8 +54,12 @@ public class CartSteps extends BasePage {
 
     @And("I fill a random zipcode in shopping cart")
     public void iFillARandomZipcodeInShoppingCart() {
-        Faker faker = new Faker();
-        cartAction.fillZipPostalCode(faker.idNumber().toString());
+        if(!genericMethods.getValueFromHashMap(RANDOM_PRODUCT_NAME).equalsIgnoreCase("$25 Virtual Gift Card")){
+            Faker faker = new Faker();
+            cartAction.fillZipPostalCode(faker.idNumber().toString());
+        }else{
+            System.out.println("######### NO NEED TO INPUT THE ZIPCODE ##########");
+        }
     }
 
     @And("I click in estimate shipping in shopping cart page")
