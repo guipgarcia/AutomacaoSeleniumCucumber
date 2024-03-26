@@ -3,8 +3,11 @@ package hooks;
 import driver_factory.DriverFactory;
 import generic_methods.GenericMethods;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import static generic_methods.GenericMethods.writeOnScren;
@@ -32,5 +35,11 @@ public class serviceHooks {
         writeOnScren("Scenario Name - " + scenario.getName());
         writeOnScren("Status - " + scenario.getStatus());
         DriverFactory.quitDriver();
+    }
+
+    @AfterStep
+    public void addScreenshot(Scenario scenario){
+        final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        scenario.attach(screenshot, "image/png", "image");
     }
 }

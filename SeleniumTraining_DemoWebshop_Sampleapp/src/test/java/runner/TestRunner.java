@@ -10,14 +10,13 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
     glue={"step_definition",
     "hooks"},
     plugin = {"pretty",
-//    "json:target/reports/cucumber.json",
-//    "html.target/reports/report-hml"
+        "json:target/reports/cucumber.json",
+        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
     },
         monochrome = true,
         snippets = SnippetType.CAMELCASE,
-        strict = true,
-
-        tags = "@Developing"
+        publish = true,
+        tags = "@ExecuteTest"
 )
 
 @RunWith(Cucumber.class)

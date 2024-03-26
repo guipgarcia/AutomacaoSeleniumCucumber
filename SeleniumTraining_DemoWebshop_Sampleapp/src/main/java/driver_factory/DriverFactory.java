@@ -42,8 +42,9 @@ public class DriverFactory {
                 cOptions.addArguments("--incognito");
                 cOptions.addArguments("start-maximized");
                 cOptions.addArguments("enable-automation");
+                //cOptions.addArguments("--headless");
                 System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
-                DesiredCapabilities dCapabilities = DesiredCapabilities.chrome();
+                DesiredCapabilities dCapabilities = new DesiredCapabilities();
                 dCapabilities.setCapability(ChromeOptions.CAPABILITY, cOptions);
                 cOptions.merge(dCapabilities);
                 driver = new ChromeDriver(cOptions);

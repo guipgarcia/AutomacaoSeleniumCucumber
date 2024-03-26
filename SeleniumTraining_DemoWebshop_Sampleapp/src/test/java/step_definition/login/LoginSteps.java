@@ -13,9 +13,8 @@ import static project_global_variables.GlobalVariables.DEMO_WEBSHOP_APPLICATION;
 
 public class LoginSteps extends BasePage {
     private String user = "";
-    public GenericMethods genericMethods = new GenericMethods();
-    private HomeAction homeAction = new HomeAction();
-    private LoginAction loginAction = new LoginAction();
+    private final HomeAction homeAction = new HomeAction();
+    private final LoginAction loginAction = new LoginAction();
 
 
     @And("I input the default credentials")

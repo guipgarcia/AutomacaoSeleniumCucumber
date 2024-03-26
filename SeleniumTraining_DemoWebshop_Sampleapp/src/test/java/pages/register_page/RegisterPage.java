@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class RegisterPage extends BasePage {
-    @FindBy(className = "page registration-page")
+    @FindBy(className = "ico-register")
     protected WebElement registerForm;
 
     @FindBy(id = "FirstName")

@@ -11,7 +11,6 @@ import static project_global_variables.GlobalVariables.CREDENTIALS_ERROR_MESSAGE
 import static project_global_variables.GlobalVariables.NO_CUSTOMER_ACCOUNT_FOUND;
 
 public class LoginAction extends LoginPage {
-    public GenericMethods genericMethods = new GenericMethods();
 
     public void fillLoginForm(String username, String password){
         // Fill email field

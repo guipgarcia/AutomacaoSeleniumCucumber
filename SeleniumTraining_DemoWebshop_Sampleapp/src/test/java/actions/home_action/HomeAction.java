@@ -31,7 +31,7 @@ public class HomeAction extends HomePage {
 
     public void sucessLoginValidation() {
         // Validate the visibility of logout link> that means that the user is logged in
-        genericMethods.validateVisibilityOfElement(logoutButton);
+        genericMethods.validateVisibilityOfElement(logoutLink);
     }
 
     public void selectComputerOptionOnTopMenu(){

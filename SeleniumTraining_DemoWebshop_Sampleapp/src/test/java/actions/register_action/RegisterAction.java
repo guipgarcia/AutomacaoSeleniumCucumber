@@ -1,5 +1,6 @@
 package actions.register_action;
 
+import com.github.javafaker.Faker;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -8,6 +9,7 @@ import pages.register_page.RegisterPage;
 
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
 import static org.openqa.selenium.By.xpath;
 import static project_global_variables.GlobalVariables.*;
 
@@ -30,6 +32,38 @@ public class RegisterAction extends RegisterPage {
         genderElement.click();
     }
 
+    public void fillAllFieldsWithFakeData(){
+        // Variables
+        Faker faker = new Faker();
+        String[] gender = {"male", "female"};
+        String password = faker.number().digits(8),
+        randomGender = gender[(int)(Math.random() * gender.length)] ;
+
+        // Select a random gender using gender variable
+        selectGenderRadioBox(randomGender);
+
+        // Fill first name with a fake data
+        fillFirstName(faker.dragonBall().character() + faker.funnyName());
+
+        // Fill last name with fake data
+        fillLastName(faker.pokemon().name() + faker.random());
+
+        // Fill email field with fake data
+        fillEmail(faker.name().fullName().replaceAll(" ","_")+"@test.com");
+
+        // Fill password and confirm password with the fake data that you've got when declared password variable
+        fillPassword(password);
+        fillConfirmPassword(password);
+    }
+
+    public void validateAllRequiredFields(){
+        String requiredField = "following-sibling::span[@class='required']";
+        assertTrue(firstNameField.findElement(xpath(requiredField)).isDisplayed());
+        assertTrue(lastNameField.findElement(xpath(requiredField)).isDisplayed());
+        assertTrue(emailField.findElement(xpath(requiredField)).isDisplayed());
+        assertTrue(passwordField.findElement(xpath(requiredField)).isDisplayed());
+        assertTrue(confirmPasswordField.findElement(xpath(requiredField)).isDisplayed());
+    }
     public void fillFirstName(String firstName){
         genericMethods.validateVisibilityOfElement(firstNameField);
         genericMethods.click(firstNameField);

@@ -20,16 +20,6 @@ public class RegisterSteps extends BasePage {
         registerAction.registerPageVisibility();
     }
 
-    @And("I fill {string} in firstname field")
-    public void iFillInFirstnameField(String firstName) {
-        registerAction.fillFirstName(firstName);
-    }
-
-    @And("I fill {string} in lastname field")
-    public void iFillInLastnameField(String lastName) {
-        registerAction.fillLastName(lastName);
-    }
-
     @And("I fill {string} in email field")
     public void iFillInEmailField(String email) {
         registerAction.fillEmail(email);
@@ -53,11 +43,6 @@ public class RegisterSteps extends BasePage {
     @Then("I can see that my registration was completed with success")
     public void iCanSeeThatMyRegistrationWasCompletedWithSuccess() {
         registerAction.registerCompletedWithSuccess();
-    }
-
-    @And("I select a gender {string} for the user")
-    public void iSelectAGenderForTheUser(String gender) {
-        registerAction.selectGenderRadioBox(gender);
     }
 
     @Then("all the required fields shows the errors")
@@ -93,5 +78,15 @@ public class RegisterSteps extends BasePage {
     @Then("I get password not matches error")
     public void iGetPasswordNotMatchesError() {
         registerAction.passwordNotMatchesError();
+    }
+
+    @When("I fill the register fields using fake data")
+    public void iFillTheRegisterFieldsUsingFakeData() {
+        registerAction.fillAllFieldsWithFakeData();
+    }
+
+    @Then("I validate all required fields on register page")
+    public void iValidateAllRequiredFieldsOnRegisterPage() {
+        registerAction.validateAllRequiredFields();
     }
 }
