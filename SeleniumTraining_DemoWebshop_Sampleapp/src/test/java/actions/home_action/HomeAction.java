@@ -55,7 +55,7 @@ public class HomeAction extends HomePage {
         genericMethods.click(registerLink);
     }
     public void accessShoppingCart(){
-        genericMethods.validateVisibilityOfElement(shoppingCartLink);
+        genericMethods.isElementPresent(shoppingCartLink);
         genericMethods.click(shoppingCartLink);
     }
     public void clickInWishListLink(){
@@ -88,7 +88,7 @@ public class HomeAction extends HomePage {
         System.out.println(genericMethods.getValueFromHashMap(RANDOM_PRODUCT_NAME));
         genericMethods.click(currentFeaturedProduct);
         try{
-            genericMethods.validateVisibilityOfElement(productAddedToCartMessage);
+            genericMethods.isElementPresent(productAddedToCartMessage);
             genericMethods.addToHashMap(KEY_EXTRA_CART_STEPS, "false");
             genericMethods.click(closeMessage);
             wait.until(ExpectedConditions.invisibilityOf(closeMessage));

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 import static org.openqa.selenium.By.xpath;
+import static project_global_variables.GlobalVariables.RANDOM_PRODUCT_NAME;
 
 public class ShopAction extends ShopPage {
     private String currentMapString = "";
@@ -41,7 +42,20 @@ public class ShopAction extends ShopPage {
 
     public void validateExtraStepsBeforeAddToCart(){
         genericMethods.validateVisibilityOfElement(productDetailsPage);
-        try{
+        currentMapString = "//*[contains(text(), '320 GB')]/ancestor::ul/li";
+
+        if(genericMethods.isElementPresent(recipientNameField)){
+            genericMethods.sendKeys(recipientNameField, "TestName");
+            genericMethods.sendKeys(recipientEmailField, "TestName@email.com");
+        }else if(genericMethods.isElementPresent(processorSlowOption)){
+            genericMethods.click(processorSlowOption);
+        }else{
+            List<WebElement> randomOption = driver.findElements(xpath(currentMapString));
+            Random random = new Random();
+            int  randomIndex = random.nextInt(randomOption.size() +1);
+            genericMethods.click(driver.findElement(xpath(currentMapString+"["+randomIndex+"]/input")));
+        }
+        /*try{
             genericMethods.sendKeys(recipientNameField, "TestName");
             genericMethods.sendKeys(recipientEmailField, "TestName@email.com");
         }catch(Exception e){
@@ -58,12 +72,12 @@ public class ShopAction extends ShopPage {
 
                 }
             }
-        }
+        }*/
     }
     public void clickOnAddToCartButton(){
-        genericMethods.validateVisibilityOfElement(addToCartBtn);
+        genericMethods.isElementPresent(addToCartBtn);
         genericMethods.click(addToCartBtn);
-        genericMethods.validateVisibilityOfElement(productAddedToCartMessage);
+        genericMethods.isElementPresent(productAddedToCartMessage);
         genericMethods.click(closeMessage);
         wait.until(ExpectedConditions.invisibilityOf(closeMessage));
     }

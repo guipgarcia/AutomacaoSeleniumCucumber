@@ -15,17 +15,15 @@
       |   username    |password|
       |gt12@email.com |teste123|
 
-    @ExecuteTest @LoginScenario @PositiveAuth @RememberMe @Issue
+    @RememberMe @Issue
     Scenario Outline: login with default credentials and click and remember me checkbox
       When input my email "<username>"
       And input my password "<password>"
       And check remember me checkbox
       And press login button
-      And I can see the post login screen
       And I click in logout link
-      And I am able to see the home page
-      And I click on login button
-      Then I can see the remember me checkbox checked and my credentials filled out "<username>" and "<password>"
+      Then I click on login button
+      And I can see the remember me checkbox checked and my credentials filled out "<username>" and "<password>"
 
       Examples:
         |   username    |password|

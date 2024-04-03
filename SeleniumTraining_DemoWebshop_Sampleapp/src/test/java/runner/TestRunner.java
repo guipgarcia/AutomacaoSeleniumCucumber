@@ -16,7 +16,7 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
         monochrome = true,
         snippets = SnippetType.CAMELCASE,
         publish = true,
-        tags = "@ExecuteTest"
+        tags = "@ShoppingCart"
 )
 
 @RunWith(Cucumber.class)

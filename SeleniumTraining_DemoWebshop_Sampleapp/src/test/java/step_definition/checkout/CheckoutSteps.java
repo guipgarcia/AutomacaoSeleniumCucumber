@@ -53,4 +53,20 @@ public class CheckoutSteps extends BasePage {
     public void iValidateThatTheOrderWasProcessedWithSuccess() {
         Assert.assertTrue(checkoutAction.isOrderProcessedWithSuccessMessage());
     }
+
+    @Then("I complete the whole process to buy a product just clicking in ok for each page")
+    public void iCompleteTheWholeProcessToBuyAProductJustClickingInOkForEachPage() {
+        Assert.assertTrue(checkoutAction.isInBillingAddressTab());
+        checkoutAction.clickInBillingAddressContinueBtn();
+        if (!genericMethods.getValueFromHashMap(RANDOM_PRODUCT_NAME).contains("Gift Card")) {
+            Assert.assertTrue(checkoutAction.isInShippingAddressTab());
+            checkoutAction.clickInShippingAddressContinueBtn();
+            Assert.assertTrue(checkoutAction.isInShippingMethodTab());
+            checkoutAction.clickInShippingMethodContinueBtn();
+        }
+        Assert.assertTrue(checkoutAction.isInPaymentMethodTab());
+        checkoutAction.clickInPaymentMethodContinueBtn();
+        Assert.assertTrue(checkoutAction.isInPaymentInformationTab());
+        checkoutAction.clickInPaymentInformationContinueBtn();
+    }
 }

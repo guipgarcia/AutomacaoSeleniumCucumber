@@ -1,12 +1,14 @@
 package step_definition.home;
 
 import actions.home_action.HomeAction;
+import actions.shop_action.ShopAction;
 import base.BasePage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
 import static project_global_variables.GlobalVariables.DEMO_WEBSHOP_APPLICATION;
+import static project_global_variables.GlobalVariables.KEY_EXTRA_CART_STEPS;
 
 public class HomeSteps extends BasePage {
 
@@ -51,7 +53,12 @@ public class HomeSteps extends BasePage {
 
     @When("I add a random product to cart from featured products tab")
     public void iAddARandomProductToCartFromFeaturedProductsTab() {
+        ShopAction shopAction = new ShopAction();
         homeAction.addRandomProductToCartFromFeaturedProductsTab();
+        if(genericMethods.getValueFromHashMap(KEY_EXTRA_CART_STEPS).equalsIgnoreCase("true")) {
+            shopAction.validateExtraStepsBeforeAddToCart();
+            shopAction.clickOnAddToCartButton();
+        }
     }
 
     @And("I click in shopping cart menu")

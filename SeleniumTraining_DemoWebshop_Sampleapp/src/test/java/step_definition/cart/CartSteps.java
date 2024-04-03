@@ -56,7 +56,7 @@ public class CartSteps extends BasePage {
     public void iFillARandomZipcodeInShoppingCart() {
         if(!genericMethods.getValueFromHashMap(RANDOM_PRODUCT_NAME).equalsIgnoreCase("$25 Virtual Gift Card")){
             Faker faker = new Faker();
-            cartAction.fillZipPostalCode(faker.idNumber().toString());
+            cartAction.fillZipPostalCode(String.valueOf(faker.phoneNumber().cellPhone()));
         }else{
             System.out.println("######### NO NEED TO INPUT THE ZIPCODE ##########");
         }
@@ -84,6 +84,20 @@ public class CartSteps extends BasePage {
 
     @Then("I can see that the checkout page is displayed")
     public void iCanSeeThatTheCheckoutPageIsDisplayed() {
+        Assert.assertTrue(cartAction.isInCheckoutPage());
+    }
+
+    @And("I validate that the shipping estimation is present on screen")
+    public void iValidateThatTheShippingEstimationIsPresentOnScreen() {
+        cartAction.clickEstimateShippingButton();
+        Assert.assertTrue(cartAction.isEstimateShippingResults());
+    }
+
+
+    @And("I complete the product checkout")
+    public void iCompleteTheProductCheckout() {
+        cartAction.checkTermsOfServiceCheckbox();
+        cartAction.clickCheckouBtn();
         Assert.assertTrue(cartAction.isInCheckoutPage());
     }
 }
