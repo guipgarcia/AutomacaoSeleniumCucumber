@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Install maven'){
             steps{
-                sh 'java -jar /var/jenkins_home/workspace/git-pipeline/target/OutSystemsConsultores 1.0-SNAPSHOT.jar'
+                sh 'java -jar /var/jenkins_home/workspace/git-pipeline/target/SeleniumTraining_DemoWebshop_Sampleapp 1.0-SNAPSHOT.jar'
             }
         }
         stage('Test'){
