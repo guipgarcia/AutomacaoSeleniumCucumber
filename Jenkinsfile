@@ -1,14 +1,15 @@
 pipeline{
     agent any
     stages{
-        stage("Test"){
+        stage('Install maven'){
+            steps{
+                sh 'java -jar /var/jenkins_home/workspace/git-pipeline/target/OutSystemsConsultores 1.0-SNAPSHOT.jar'
+            }
+        }
+        stage('Test'){
             steps{
                 dir('SeleniumTraining_DemoWebshop_Sampleapp'){
-                    withMaven(
-                        // Maven installation declared in the Jenkins "Global Tool Configuration"
-                        maven: 'maven-3.9.6') {
-                        sh 'mvn -B package --file pom.xml test'
-                    }
+                    sh 'mvn -B package --file pom.xml test'
                 }
             }
         }
