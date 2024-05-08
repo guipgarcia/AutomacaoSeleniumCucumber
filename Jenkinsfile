@@ -8,9 +8,7 @@ pipeline{
         stage('Test'){
             steps{
                 dir('SeleniumTraining_DemoWebshop_Sampleapp'){
-                    container ('maven'){
-                        sh 'mvn version'
-                    }
+                    sh 'mvn version'
                 }
             }
         }
