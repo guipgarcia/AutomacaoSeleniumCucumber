@@ -4,7 +4,9 @@ pipeline{
         stage('Test'){
             steps{
                 dir('SeleniumTraining_DemoWebshop_Sampleapp'){
-                   sh 'mvn -B package --file pom.xml test'
+                    container ('maven'){
+                        sh 'mvn version'
+                    }
                 }
             }
         }
