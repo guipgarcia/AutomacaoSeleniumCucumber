@@ -8,7 +8,7 @@ pipeline{
         stage('Test'){
             steps{
                 dir('SeleniumTraining_DemoWebshop_Sampleapp'){
-                    sh 'mvn version'
+                    sh 'mvn -B package --file pom.xml test'
                 }
             }
         }
