@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Install maven'){
             steps{
-                sh 'sudo yum install maven'
+                sh 'yum install maven'
             }
         }
         stage('Test'){
